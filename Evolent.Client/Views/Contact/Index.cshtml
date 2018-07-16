@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Evolent.Client.Models.Contact.ContactEntity>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div align="center">
+    <a href="@Url.Action("Create","Contact")">Add New Contact </a>
+    <br /> <br />
+    @if (ViewBag.contactList == null)
+    {
+        <div>
+            <p>No Records found</p>
+        </div>
+    }
+
+    else
+    {
+        <table cellpadding="2" cellspacing="2" border="1">
+            <tr>
+                <th>ID</th>
+                <th>FirstName </th>
+                <th>LastName </th>
+                <th>Address </th>
+                <th>Email</th>
+                <th>PhoneNumber </th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            @foreach (var contact in ViewBag.contactList)
+            {
+                <tr>
+                    <td>@contact.ID</td>
+                    <td>@contact.FirstName</td>
+                    <td>@contact.LastName</td>
+                    <td>@contact.Address</td>
+                    <td>@contact.Email</td>
+                    <td>@contact.PhoneNumber</td>
+                    <td>@contact.Status</td>
+                    <td>
+                        <a onclick="return confirm('Do you want to Delete?')" href="@Url.Action("Delete", "Contact", new { id = contact.ID })">Delete</a>||
+                        <a href="@Url.Action("Edit", "Contact", new { id = contact.ID })">Edit</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+
+</div>
